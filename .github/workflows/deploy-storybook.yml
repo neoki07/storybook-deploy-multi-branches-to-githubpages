@@ -31,7 +31,6 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           path: storybook-static/
-          name: ${{ github.ref_name }}
   deploy:
     runs-on: ubuntu-latest
     needs: build
