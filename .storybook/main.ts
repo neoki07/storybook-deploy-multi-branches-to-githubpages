@@ -12,14 +12,5 @@ const config: StorybookConfig = {
     name: "@storybook/react-vite",
     options: {},
   },
-  async viteFinal(config) {
-    const { mergeConfig } = await import("vite");
-
-    const basePath = process.env.STORYBOOK_BASE_PATH;
-
-    return mergeConfig(config, {
-      base: basePath ? `/${basePath}/` : "/",
-    });
-  },
 };
 export default config;
