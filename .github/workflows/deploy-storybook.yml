@@ -13,20 +13,20 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - name: Setup Node.js environment
         uses: actions/setup-node@v4
         with:
           node-version: 22
       - name: Install node_modules
         run: npm ci
-      - name: Build pages
+      - name: Build pages for main
         run: npm run build-storybook
+      - name: Build pages for develop
+        run: npx storybook build --output-dir storybook-static/develop
         env:
-          STORYBOOK_BASE_PATH: ${{ github.ref_name != 'main' && github.ref_name || '' }}
-      - name: Build sub pages
-        run: npx storybook build --output-dir storybook-static/sub
-        env:
-          STORYBOOK_BASE_PATH: sub
+          STORYBOOK_BASE_PATH: develop
       - name: Upload artifacts
         uses: actions/upload-pages-artifact@v3
         with:
