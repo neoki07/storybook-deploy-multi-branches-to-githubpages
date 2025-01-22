@@ -15,8 +15,9 @@ const config: StorybookConfig = {
   async viteFinal(config) {
     const { mergeConfig } = await import("vite");
 
+    const repo = process.env.GITHUB_REPOSITORY;
     const basePath = process.env.STORYBOOK_BASE_PATH;
-    const base = basePath ? `/${basePath}/` : "/";
+    const base = basePath ? `/${repo}/${basePath}/` : `/${repo}/`;
 
     console.log("basePath", basePath);
     console.log("base", base);
